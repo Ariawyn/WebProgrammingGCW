@@ -44,3 +44,13 @@ class Comment(models.Model):
 
     # Comment variables
     body = models.TextField("Body")
+    published = models.DateTimeField("Date Published")
+
+# Vote: The "Like" or "Dislike" on an article by the user
+class Vote(models.Model):
+    # Foreign keys
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    # Vote variables
+    like = models.BooleanField(default=True)    # If true, the user has liked the article, if false, it is a dislike
