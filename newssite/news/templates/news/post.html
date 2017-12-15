@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}LiteralActualFakeNews{% endblock %}
+
+{% block content %}
+	<h2>Create a new article:</h2>
+	<div>
+		<form class="col s12" method="post">
+			{% csrf_token %}
+			<div class="row">
+				<div class="input-field col s6">
+					<input name="title" id="title" type="text" class="validate">
+					<label for="title" class="active">Title:</label>
+				</div>
+				<div class="input-field col s6">
+					<select>
+						<option value="" disabled selected>Choose category</option>
+						<option value="SP">Sports</option>
+						<option value="BU">Buisness</option>
+						<option value="EN">Entertainment</option>
+						<option value="TE">Technology</option>
+					</select>
+					<label>Category:</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea name="body" id="body" class="materialize-textarea"></textarea>
+					<label for="body">Body:</label>
+				</div>
+			</div>
+			<button type="submit">Post</button>
+		</form>
+	</div>
+{% endblock %}

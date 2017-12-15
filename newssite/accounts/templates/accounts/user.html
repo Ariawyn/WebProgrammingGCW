@@ -27,14 +27,14 @@
 	<div class="row">
 		<h3>User articles:</h3>
 		{% for article in user_articles %}
-			<h4><a href="/news/{{ article.id }}">{{ article.title }}</a></h4>
+			<h5><a href="/news/{{ article.id }}">{{ article.title }}</a></h5>
 		{% endfor %}
 	</div>
 	{% endif %}
 	<div class="row">
 		<h3>User comments:</h3>
 		{% for comment in user_comments %}
-		<h4> Comment on article: {{ comment.article.title }} </h4>
+		<h5> Comment on article: {{ comment.article.title }} </h5>
 		<p>
 			{{ comment.body }}
 		</p>

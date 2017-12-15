@@ -1,6 +1,8 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 from .models import Article
 
@@ -11,7 +13,29 @@ def index(request):
 def detail(request, article_id):
 	article = get_object_or_404(Article, pk=article_id)
 	return render(request, 'news/detail.html', {'article': article})
-	
+
+@login_required
+def post(request):
+        # Check if GET or POST request
+        if(request.method == "POST"):
+                if(request.user.is_contributor):
+                        article = Article(
+                                title=request.POST['title'],
+                                body=request.POST['body'],
+                                category=request.POST.get('category', "SP"),
+                                author=request.user,
+                                published=timezone.now(),
+                        )
+                        article.save()
+                        return redirect("/news/")
+                else:
+                        return redirect("/news/")
+        else:
+                if(request.user.is_contributor):
+                        return render(request, 'news/post.html', {'categories': Article.CATEGORIES})
+                else:
+                        return redirect("/news/")
+
 def vote(request):
 	vote_type = request.POST.get('type')
 	page_id = get_object_or_404(Article, pk=article_id)

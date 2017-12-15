@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Index Page</title>
-</head>
-<body>
-	<h1>You Reached the Index Page and its not broke, yay.</h1>
-	<div> have some articles:</div>
+{% extends 'base.html' %}
+
+{% block title %}LiteralActualFakeNews{% endblock %}
+
+{% block content %}
+	<h1>Your daily news:</h1>
+	<div>
 	{% if latest_article_list %}
 		<ul>
 		{% for article in latest_article_list %}
+		<div class="row">	
 			<li><a href="/news/{{article.id}}/">{{article.title}}</a> &nbsp; Score: {{article.score}}</li>
+		</div>
 		{% endfor %}
 		</ul>
 	{% else %}
 		<p>No articles are available.</p>
 	{% endif %}
-</body>
-</html>
+	</div>
+{% endblock %}
