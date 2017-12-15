@@ -9,11 +9,11 @@
 	{% if latest_article_list %}
 		<ul>
 		{% for article in latest_article_list %}
-			<li><a href="/news/{{article.id}}/">{{article.title}}</a></li>
+			<li><a href="/news/{{article.id}}/">{{article.title}}</a> &nbsp; Score: {{article.score}}</li>
 		{% endfor %}
 		</ul>
 	{% else %}
-		<p>No articles are available. For Loop machine broke</p>
+		<p>No articles are available.</p>
 	{% endif %}
 </body>
 </html>
