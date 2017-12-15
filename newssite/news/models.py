@@ -8,6 +8,9 @@ class Article(models.Model):
     title = models.CharField("Title", max_length=100)
     body = models.TextField("Body")
 
+    # Author
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
     # Score variable based on user upvotes and downvotes
     score = models.IntegerField("Score", default=0)
 

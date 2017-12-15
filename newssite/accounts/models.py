@@ -59,8 +59,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # Basic user variables
     email = models.EmailField("Email Address", max_length=255, unique=True)
-    first_name = models.CharField("First Name", max_length=255, blank=True)
-    last_name = models.CharField("Last Name", max_length=255, blank=True)
+    first_name = models.CharField("First Name", max_length=255, blank=False)
+    last_name = models.CharField("Last Name", max_length=255, blank=False)
     phone_number = models.CharField("Phone Number", max_length=10, blank=False);
     
     
@@ -78,15 +78,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # Functions of User
     def get_full_name(self):
+        #return self.email
         return self.first_name + " " + self.last_name
 
     def get_short_name(self):
+        #return self.email
         return self.first_name
 
     def has_perm(self, perm, obj=None):
         return True
 
-    def has_module_perm(self, app_label):
+    def has_module_perms(self, app_label):
         return True
     
     @property
@@ -103,7 +105,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # String representation of class
     def __str__(self):
-        return self.fullname()
+        return self.get_full_name()
         
 
 
