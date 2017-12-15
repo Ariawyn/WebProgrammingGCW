@@ -2,15 +2,50 @@
 <html>
 <head>
 	<title>Index Page</title>
+	<style>
+		body{
+			border: 1px solid #000000;
+			border-radius: 5px;
+			padding: 1%;
+		}
+		div{
+			padding: 3px;
+			border: 1px solid black;
+			margin: 1px;
+		}
+		.title{
+			font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+			font-size: 30pt
+		}
+		.score{
+			font-size: 30px;
+			color:red;
+			wrap: 
+		}
+		.news{
+			font-family: "Comic Sans MS", cursive, sans-serif;
+		}
+	</style>
+	<script>
+	//wow i forgot jscipt real bad
+		updoot(){
+			document.getElementById('title').equals
+		}
+		
+		downdoot(){
+			
+		}
+	</script>
+	
 </head>
 <body>
-{{article}}
-<!--
-	<h1>Test article, contents here.</h1>
+	<div class="title">{{article.title}} - id: {{article.id}}</div>
 	<div>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum bibendum ante quis lacus sagittis, id dignissim metus lacinia. Quisque ac placerat tellus, a pretium augue. Integer facilisis elit nulla, vitae pulvinar nisl sodales quis. Morbi suscipit ligula nec mi hendrerit, consequat hendrerit ligula pretium. Sed consectetur convallis nulla eget semper. Pellentesque sit amet massa enim. Maecenas et rutrum nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in eros eu ante laoreet interdum nec eget magna. Aliquam id posuere magna. Duis consectetur, erat sed scelerisque imperdiet, sem sem suscipit dolor, ac pretium metus sem eget risus. Phasellus quis ante laoreet, iaculis augue id, fringilla elit. Nulla id lectus et nulla tristique semper ac pretium tellus. Aenean rhoncus, arcu vitae luctus elementum, diam nibh fermentum urna, cursus interdum nunc sem nec mauris. Suspendisse potenti.
-	</div>
+		<div class="score" id="value">Score: {{article.score}} &nbsp; Authour: {{article.author_id}}</div>
+		<div><input type=button value="Updoot Test" onclick=updoot()><input type=button value="Downdoot Test" onclick=downdoot()></div>
+	<div>
+	<div class="news">Body <br> {{article.body}}</div>
+	<div class="comments">Comments Section</div>
 	
-	-->
 </body>
 </html>
