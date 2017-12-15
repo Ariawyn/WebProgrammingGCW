@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 # Article: A basic news article class
@@ -29,3 +30,14 @@ class Article(models.Model):
     published = models.DateTimeField("Date Published")
 
 
+    def __str__(self):
+        return self.title
+
+# Comment: A basic comment on a news article
+class Comment(models.Model):
+    # Foreign keys
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    # Comment variables
+    body = models.TextField("Body")
