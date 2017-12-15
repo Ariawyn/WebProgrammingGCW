@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}User account{% endblock %}
+
+{% block content %}
+	<h2>User account</h2>
+	<div class="row">
+		<h3>Change user information:</h3>
+		<form class="col s12" method="post">
+			{% csrf_token %}
+			<div class="input-field col s6">
+				<input value="{{ request.user.first_name }}" name="first_name" id="first_name" type="text" class="validate">
+				<label for="first_name" class="active">First Name</label>
+			</div>
+			<div class="input-field col s6">
+				<input value="{{ request.user.last_name }}" name="last_name" id="last_name" type="text" class="validate">
+				<label for="last_name" class="active">Last Name</label>
+			</div>
+			<div class="input-field col s12">
+				<input value="{{ request.user.phone_number }}" name="phone_number" id="phone_number" type="text" class="validate">
+				<label for="phone_number" class="active">Phone Number</label>
+			</div>
+			<button type="submit">Save</button>
+		</form>
+	</div>
+	{% if request.user.is_contributor %}
+	<div class="row">
+		<h3>User articles:</h3>
+		{% for article in user_articles %}
+			<h4><a href="/news/{{ article.id }}">{{ article.title }}</a></h4>
+		{% endfor %}
+	</div>
+	{% endif %}
+	<div class="row">
+		<h3>User comments:</h3>
+		{% for comment in user_comments %}
+		<h4> Comment on article: {{ comment.article.title }} </h4>
+		<p>
+			{{ comment.body }}
+		</p>
+		{% endfor %}
+	</div>
+{% endblock %}

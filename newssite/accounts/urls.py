@@ -13,5 +13,8 @@ urlpatterns = [
     url(r'^logout/$', authentication_views.logout, {'next_page': '/news'}, name='logout'),
 
     # example: /accounts/register/
-    url(r'^register/$', views.register, name="registration"), 
+    url(r'^register/$', views.register, name="registration"),
+
+    # example: /accounts/user/
+    url(r'^user/$', views.user, name="user"),
 ]
