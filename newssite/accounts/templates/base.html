@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>Accounts</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	</head>
+	<body>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Logo</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="">Entertainment</a></li>
+					<li><a href="">Technology</a></li>
+					<li><a href="">People</a></li>
+					<li><a href="">Sports</a></li>
+					<li><a href="/accounts/login">Log in</a></li>
+					<li><a href="/accounts/register">Register</a></li>
+				</ul>
+			</div>
+		</nav>
+		{% block content %}
+		{% endblock %}
+	</body>
+</html>

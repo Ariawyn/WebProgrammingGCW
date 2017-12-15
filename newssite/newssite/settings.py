@@ -86,6 +86,9 @@ DATABASES = {
 # Setting the user model we want to use for authentication
 AUTH_USER_MODEL = "accounts.User"
 
+# Setting the correct authentication redirect
+LOGIN_REDIRECT_URL = '/news'
+
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
