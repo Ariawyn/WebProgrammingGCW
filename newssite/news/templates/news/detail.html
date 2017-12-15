@@ -27,12 +27,7 @@
 		}
 	</style>
 	<script>
-	//wow i forgot jscipt real bad
-		updoot(){
-			document.getElementById('title').equals
-		}
-		
-		downdoot(){
+		vote(voteType){
 			
 		}
 	</script>
@@ -42,7 +37,11 @@
 	<div class="title">{{article.title}} - id: {{article.id}}</div>
 	<div>
 		<div class="score" id="value">Score: {{article.score}} &nbsp; Authour: {{article.author_id}}</div>
-		<div><input type=button value="Updoot Test" onclick=updoot()><input type=button value="Downdoot Test" onclick=downdoot()></div>
+		<form action=submit>
+		{% csrf_token %}
+			<input type=button value="Like" onclick=vote('up')/>
+			<input type=button value="Dislike" onclick=vote('down') />
+		</form>
 	<div>
 	<div class="news">Body <br> {{article.body}}</div>
 	<div class="comments">Comments Section</div>
