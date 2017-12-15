@@ -1,50 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Index Page</title>
-	<style>
-		body{
-			border: 1px solid #000000;
-			border-radius: 5px;
-			padding: 1%;
-		}
-		div{
-			padding: 3px;
-			border: 1px solid black;
-			margin: 1px;
-		}
-		.title{
-			font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-			font-size: 30pt
-		}
-		.score{
-			font-size: 30px;
-			color:red;
-			wrap: 
-		}
-		.news{
-			font-family: "Comic Sans MS", cursive, sans-serif;
-		}
-	</style>
-	<script>
-		vote(voteType){
-			
-		}
-	</script>
-	
-</head>
-<body>
-	<div class="title">{{article.title}} - id: {{article.id}}</div>
-	<div>
-		<div class="score" id="value">Score: {{article.score}} &nbsp; Authour: {{article.author_id}}</div>
-		<form action=submit>
-		{% csrf_token %}
-			<input type=button value="Like" onclick=vote('up')/>
-			<input type=button value="Dislike" onclick=vote('down') />
-		</form>
-	<div>
-	<div class="news">Body <br> {{article.body}}</div>
-	<div class="comments">Comments Section</div>
-	
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Article: {{article.title}} {% endblock %}
+
+{% block content %}
+	<h2 class="title">{{article.title}}</h2>
+	<h5>By author: {{article.author.first_name}} {{article.author.last_name}}</h5>
+	{% if article.category == "SP" %}
+		<h5>Category: Sports</h5>
+	{% endif %}
+	{% if article.category == "BU" %}
+		<h5>Category: Buisness</h5>
+	{% endif %}
+	{% if article.category == "TE" %}
+		<h5>Category: Technology</h5>
+	{% endif %}
+	{% if article.category == "EN" %}
+		<h5>Category: Entertainment</h5>
+	{% endif %}
+	<div class="row">
+		<p>{{article.body}}</p>
+	</div>
+	<div class="row">
+		<h5>Comments Section</h5>
+		<div class="row">
+			<form class="col s12" method="post">
+				{% csrf_token %}
+				<div class="input-field col s12">
+					<textarea name="body" id="body" class="materialize-textarea"></textarea>
+					<label for="body">Comment:</label>
+				</div>
+				<button type="submit">Post</button>
+			</form>
+		</div>
+		{% if comments %}
+			{% for comment in comments %}
+			<div class="row">
+				<h6>Comment by user: {{ comment.user.first_name }} {{ comment.user.last_name }}</h6>
+				<p>{{ comment.body }}</p>
+			</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock %}

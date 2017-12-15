@@ -4,15 +4,27 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
-from .models import Article
+from .models import Article, Comment
 
 def index(request):
 	latest_article_list = Article.objects.all()
 	return render(request,'news/index.html', {'latest_article_list': latest_article_list})
 	
 def detail(request, article_id):
-	article = get_object_or_404(Article, pk=article_id)
-	return render(request, 'news/detail.html', {'article': article})
+        if(request.method == "POST"):
+                # Posting a comment on the article
+                comment = Comment(
+                        article=get_object_or_404(Article, pk=article_id),
+                        user=request.user,
+                        body=request.POST['body'],
+                        published=timezone.now(),
+                )
+                comment.save()
+                return redirect("/news/" + article_id)
+
+        article = get_object_or_404(Article, pk=article_id)
+        comments = Comment.objects.filter(article=article)
+        return render(request, 'news/detail.html', {'article': article, 'comments': comments})
 
 @login_required
 def post(request):
@@ -22,7 +34,7 @@ def post(request):
                         article = Article(
                                 title=request.POST['title'],
                                 body=request.POST['body'],
-                                category=request.POST.get('category', "SP"),
+                                category=request.POST.get('category', "TE"),
                                 author=request.user,
                                 published=timezone.now(),
                         )
